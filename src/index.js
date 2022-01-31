@@ -1,13 +1,17 @@
+require('./models/User');
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 
+app.use(bodyParser.json());
 app.use(authRoutes);
 
 const mongoUri =
 	'mongodb+srv://admin:oasswordpassword@cluster0.cu8ic.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+
 mongoose.connect(mongoUri);
 mongoose.connection.on('connected', () => {
 	console.log('Connected to mongo instance');
